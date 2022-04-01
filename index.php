@@ -18,7 +18,8 @@
 				<div class="leftbar d-flex flex-column">
 					<div><a href='index.php'>Home</a></div><br>
 					<div><a href='connexion.php'>Me connecter</a></div><br>
-					<div><a href='inscription.php'>M'inscrire</a></div>
+					<div><a href='inscription.php'>M'inscrire</a></div><br>
+                    <div><a href='ajoutFilm.php'>Ajouter un film</a></div>
 				</div>
 			</div>
 			<div class="en-tete d-flex flex-grow-1">	

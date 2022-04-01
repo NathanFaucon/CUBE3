@@ -18,7 +18,8 @@
 				<div class="leftbar d-flex flex-column">
 					<div><a href='index.php'>Home</a></div><br>
 					<div><a href='connexion.php'>Me connecter</a></div><br>
-					<div><a href='inscription.php'>M'inscrire</a></div>
+					<div><a href='inscription.php'>M'inscrire</a></div><br>
+                    <div><a href='ajoutFilm.php'>Ajouter un film</a></div>
 				</div>
 			</div>
 			<div class="en-tete d-flex flex-grow-1">	
@@ -33,24 +34,25 @@
             <h1>Connexion</h1>
         </div>
 
-        <form>
+        <form method="POST" action="checkAuthent.php">
             <div class="formInput">
                 <span for="colFormspan" class="col-sm-2 col-form-span">Email</span>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
                 </div>
             </div>
 
             <div class="formInput">
                 <span for="colFormspan" class="col-sm-2 col-form-span">Mot de passe</span>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="mdp" placeholder="Mot de passe">
+                    <input type="password" class="form-control" id="mdp" placeholder="Mot de passe" name="pass">
                 </div>
             </div>
 
             <div class="inscription">
-                <button type="button" onclick="inscription()" id="buttonInscri">Se connecter</button>
+                <button type="submit" id="buttonInscri">Se connecter</button>
             </div>	
+            
         </form>    
     </body>
     
