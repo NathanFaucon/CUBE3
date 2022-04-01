@@ -50,7 +50,7 @@
             </div>
 
             <div class="inscription">
-                <button type="submit" id="buttonInscri">Se connecter</button>
+                <button type="submit">Se connecter</button>
             </div>	
             
         </form>    
