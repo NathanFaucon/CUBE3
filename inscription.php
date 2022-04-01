@@ -33,37 +33,37 @@
 			<h1>Formulaire d'inscripion</h1>
 			<h5>Saisis les informations ci-dessous pour t'inscrire</h5>
 		</div>
-		<form>
+		<form action="checkInscription.php" method="post">
 			<div class="formInput">
 				<span for="colFormspan" class="col-sm-2 col-form-span">Nom</span>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="name" placeholder="Nom">
+					<input type="text" class="form-control" name="nom" id="name" placeholder="Nom">
 				</div>
 			</div>
 
 			<div class="formInput">
 				<span for="colFormspan" class="col-sm-2 col-form-span">Prénom</span>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="firstname" placeholder="Prénom">
+					<input type="text" class="form-control" name="prenom" id="firstname" placeholder="Prénom">
 				</div>
 			</div>
 
 			<div class="formInput">
 				<span for="colFormspan" class="col-sm-2 col-form-span">Email</span>
 				<div class="col-sm-10">
-					<input type="email" class="form-control" id="email" placeholder="Email">
+					<input type="email" class="form-control" name="mail" id="email" placeholder="Email">
 				</div>
 			</div>
 
 			<div class="formInput">
 				<span for="colFormspan" class="col-sm-2 col-form-span">Mot de passe</span>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="mdp" placeholder="Mot de passe">
+					<input type="password" class="form-control" name="password" id="mdp" placeholder="Mot de passe">
 				</div>
 			</div>
 
 			<div class="inscription">
-				<button type="button" onclick="inscription()" id="buttonInscri">M'inscrire</button>
+				<button type="submit" id="buttonInscri">M'inscrire</button>
 			</div>	
 		</form>
 	</body>
