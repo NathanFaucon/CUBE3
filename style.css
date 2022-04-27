@@ -119,3 +119,28 @@ a{
 	padding-top: 20px;
 	margin-left: 10%;
 }
+
+.cards-container{
+    display: flex;
+    flex-direction: row;
+	margin-left: 160px;
+    width: 90%;
+    height: 100%;
+    align-items: center;
+	padding: 20px;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.card{
+	display:flex;
+	flex-wrap: wrap;
+}
+
+table, th, td 
+{
+    border:1px solid black;
+    background-color:white;
+    padding:5px;
+    margin-left: 20%;
+}

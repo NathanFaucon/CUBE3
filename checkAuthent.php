@@ -21,7 +21,9 @@
             {
                 if ((strcmp($user['mail'],$_POST['email'])==0) && (strcmp($user['password'],$_POST['pass'])==0))
                 {
-                    $flag=1;  
+                    $flag=1;
+                    $email_user=$user['mail'];
+                    $isAdmin=$user['admin'];
                 } 
             }
             if ($flag==0)
@@ -29,9 +31,10 @@
                 echo "Mauvais identifiants";
             }
             else{
-            echo "<p>
-                Bienvenue " .$_POST["email"]." <br>
-             Votre mot de passe est : ".$_POST["pass"]."</p>";             
+            $_SESSION['email']=$email_user;
+            $_SESSION['admin']=$isAdmin;
+            header('Location: index.php');
+            exit();     
             }
         ?>
             

@@ -24,7 +24,8 @@
 						}
 						else
 						{
-							echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div>";
+							echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div>
+                            <div><a href='listUser.php'>Utilisateurs</a></div><br>";
 						}
 					?>
 				</div>

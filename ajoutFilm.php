@@ -16,10 +16,18 @@
 				</div>
 
 				<div class="leftbar d-flex flex-column">
-					<div><a href='index.php'>Home</a></div><br>
-					<div><a href='connexion.php'>Me connecter</a></div><br>
-					<div><a href='inscription.php'>M'inscrire</a></div><br>
-                    <div><a href='ajoutFilm.php'>Ajouter un film</a></div>
+                    <div><a href='index.php'>Home</a></div><br>
+					<?php 
+						if(!isset($_SESSION['email'])){
+							echo "<div><a href='connexion.php'>Me connecter</a></div><br>
+							<div><a href='inscription.php'>M'inscrire</a></div><br>";
+						}
+						else
+						{
+							echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
+							<div><a href='logOut.php'>Se déconnecter</a></div><br>";
+						}
+					?>
 				</div>
 			</div>
 			<div class="en-tete d-flex flex-grow-1">	

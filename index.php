@@ -17,9 +17,18 @@
 
 				<div class="leftbar d-flex flex-column">
 					<div><a href='index.php'>Home</a></div><br>
-					<div><a href='connexion.php'>Me connecter</a></div><br>
-					<div><a href='inscription.php'>M'inscrire</a></div><br>
-                    <div><a href='ajoutFilm.php'>Ajouter un film</a></div>
+					<?php 
+						if(!isset($_SESSION['email'])){
+							echo "<div><a href='connexion.php'>Me connecter</a></div><br>
+							<div><a href='inscription.php'>M'inscrire</a></div><br>";
+						}
+						else
+						{
+							echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
+                            <div><a href='listUser.php'>Utilisateurs</a></div><br>
+							<div><a href='logOut.php'>Se déconnecter</a></div><br>";
+						}
+					?>
 				</div>
 			</div>
 			<div class="en-tete d-flex flex-grow-1">	
@@ -29,5 +38,33 @@
 				</p>
 			</div>
 		</div>
+		<div class="cards-container d-flex flex-row">
+		<?php 
+			try{
+				$bdd=new PDO('mysql:host=localhost; dbname=videotheque; charset=utf8', 'root', 'root');
+			}
+			catch(Exception $e)
+			{
+				echo "Connection failed: " . $e->getMessage();
+			}
+			
+			$listeFilms = $bdd->prepare('SELECT * FROM films');
+			$listeFilms->execute();
+			$films=$listeFilms->fetchAll();
+			foreach ($films as $film) 
+			{
+				echo '
+				<div class="card" style="width: 18rem;">
+					<img src="images/'.$film['image_film'].'" class="card-img-top" alt="...">
+					<div class="card-body">
+					<h5 class="card-title">'.$film['nom_film'].'</h5>
+					<p class="card-text">'.$film['synopsis'].'</p>
+					<a href="#" class="btn btn-primary">Acheter</a>
+					</div>
+				</div>';
+			}
+		?>
+		</div>
+		
     </body>
 </html>
