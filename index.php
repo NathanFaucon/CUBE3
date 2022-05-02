@@ -54,15 +54,16 @@
 			$films=$listeFilms->fetchAll();
 			foreach ($films as $film) 
 			{
-				echo '
-				<div class="card" style="width: 18rem;">
-					<img src="images/'.$film['image_film'].'" class="card-img-top" alt="...">
-					<div class="card-body">
-					<h5 class="card-title">'.$film['nom_film'].'</h5>
-					<p class="card-text">'.$film['synopsis'].'</p>
-					<a href="#" class="btn btn-primary">Acheter</a>
+				echo "
+				<form method='post' action='favFilm.php'>
+				<div class='card' style='width: 18rem;'>
+					<img src='images/".$film['image_film']."' class='card-img-top' alt='...'>
+					<div class='card-body'>
+					<h5 class='card-title'>".$film['nom_film']."</h5>
+					<p class='card-text'>".$film['synopsis']."</p>
+					<button type='submit' value='".$film['id_film']."' name='id_film'>Ajouter à ma liste</button>
 					</div>
-				</div>';
+				</div></form>";
 			}
 		?>
 		</div>

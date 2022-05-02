@@ -24,6 +24,7 @@
                     $flag=1;
                     $email_user=$user['mail'];
                     $isAdmin=$user['admin'];
+                    $id_user=$user['id_user'];
                 } 
             }
             if ($flag==0)
@@ -33,6 +34,7 @@
             else{
             $_SESSION['email']=$email_user;
             $_SESSION['admin']=$isAdmin;
+            $_SESSION['id_user']=$id_user;
             header('Location: index.php');
             exit();     
             }
