@@ -68,6 +68,7 @@
                 <tr>
                     <th>Nom</th>
                     <th>Réalisateur(s)</th>
+                    <th>Genre(s)</th>
                     <th>Date de sortie</th>
                     <th>Durée</th>
                     <th>Synopsis</th>
@@ -79,6 +80,9 @@
                     $listeReals = $bdd->prepare('SELECT id_real FROM realise_par WHERE id_film='.$film['id_film']);
                     $listeReals->execute();
                     $reals=$listeReals->fetchAll();
+                    $listeGenres = $bdd->prepare('SELECT id_genre FROM film_genre WHERE id_film='.$film['id_film']);
+                    $listeGenres->execute();
+                    $genres=$listeGenres->fetchAll();
                     echo "<tr>
                     <td><input type='hidden' value='".$film['id_film']."' name='id_film'>".$film['nom_film']."</td>
                     <td>";
@@ -92,13 +96,21 @@
                             echo "<br>";
                         }
                     }
-                    echo "</td>
-                    <td>".$film['date_film']."</td>
+                    echo "</td><td>";
+                    foreach ($genres as $genre)  
+                    {
+                        $listeGenres = $bdd->prepare('SELECT nom_genre FROM genre WHERE id_genre='.$genre['id_genre']);
+                        $listeGenres->execute();
+                        $genree=$listeGenres->fetchAll();
+                        foreach($genree as $genr){
+                            echo $genr['nom_genre'];
+                            echo "<br>";
+                        }
+                    }
+                    echo "</td>";
+                    echo "<td>".$film['date_film']."</td>
                     <td>".$film['duree_film']." minutes</td>
                     <td>".$film['synopsis']."</td>
-                    <input type='hidden' value='".$film['nom']."' name='nom'>
-                    <input type='hidden' value='".$film['prenom']."' name='prenom'>
-                    <input type='hidden' value='".$film['mail']."' name='mail'>
                     <form action='editFilm.php' method='POST'>
                     <td><button type='submit' value='".$film['id_film']."' name='id_film' class='bouton'>Modifier</button><br></form>
                     <form action='deleteFilm.php' method='POST'>
