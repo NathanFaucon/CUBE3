@@ -61,36 +61,53 @@
         <?php 
             try{
                 $bdd=new PDO('mysql:host=localhost; dbname=videotheque; charset=utf8', 'root', 'root');
-                $listeUsers = $bdd->prepare('SELECT * FROM users');
-                $listeUsers->execute();
-                $users=$listeUsers->fetchAll();
+                $listeFilms = $bdd->prepare('SELECT * FROM films');
+                $listeFilms->execute();
+                $films=$listeFilms->fetchAll();
                 echo "<table>
                 <tr>
-                    <th>Email</th>
-                    <th>Admin</th>
                     <th>Nom</th>
-                    <th>Prenom</th>
+                    <th>Réalisateur(s)</th>
+                    <th>Date de sortie</th>
+                    <th>Durée</th>
+                    <th>Synopsis</th>
                     <th>Moderation</th>
                 </tr>";
-                foreach ($users as $user) 
+                foreach ($films as $film)  
                 {
-                    echo "<tr>
-                    <td><input type='hidden' value='".$user['id_user']."' name='id_user'>".$user['mail']."</td>
-                    <td>".$user['admin']."</td>
-                    <td>".$user['nom']."</td>
-                    <td>".$user['prenom']."</td>";
                     
-                    if($user['admin']!=1)
+                    $listeReals = $bdd->prepare('SELECT id_real FROM realise_par WHERE id_film='.$film['id_film']);
+                    $listeReals->execute();
+                    $reals=$listeReals->fetchAll();
+                    echo "<tr>
+                    <td><input type='hidden' value='".$film['id_film']."' name='id_film'>".$film['nom_film']."</td>
+                    <td>";
+                    foreach ($reals as $real)  
                     {
-                        echo "<form action='editUser.php' method='POST'>
-                        <td><button type='submit' value='".$user['id_user']."' name='id_user' class='bouton'>Modifier</button><br></form>
-                        <form action='deleteUser.php' method='POST'>
-                        <button type='submit' value='".$user['id_user']."' name='id_user' class='bouton'>Supprimer</button></td>
-                        </tr></form>";
+                        $listeReals = $bdd->prepare('SELECT nom_real FROM realisateurs WHERE id_real='.$real['id_real']);
+                        $listeReals->execute();
+                        $realis=$listeReals->fetchAll();
+                        foreach($realis as $reali){
+                            echo $reali['nom_real'];
+                            echo "<br>";
+                        }
+                    }
+                    echo "</td>
+                    <td>".$film['date_film']."</td>
+                    <td>".$film['duree_film']." minutes</td>
+                    <td>".$film['synopsis']."</td>
+                    <input type='hidden' value='".$film['nom']."' name='nom'>
+                    <input type='hidden' value='".$film['prenom']."' name='prenom'>
+                    <input type='hidden' value='".$film['mail']."' name='mail'>
+                    <form action='editFilm.php' method='POST'>
+                    <td><button type='submit' value='".$film['id_film']."' name='id_film' class='bouton'>Modifier</button><br></form>
+                    <form action='deleteFilm.php' method='POST'>
+                    <button type='submit' value='".$film['id_film']."' name='id_film' class='bouton'>Supprimer</button></td>
+                    </tr></form>";
                     }
                     
                    
-                }
+                
                 echo "</table>";
             }
             catch(PDOException $e)

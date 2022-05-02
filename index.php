@@ -26,6 +26,7 @@
 						{
 							echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
                             <div><a href='listUser.php'>Utilisateurs</a></div><br>
+							<div><a href='listFilms.php'>Films</a></div><br>
 							<div><a href='logOut.php'>Se déconnecter</a></div><br>";
 						}
 					?>

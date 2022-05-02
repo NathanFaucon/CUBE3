@@ -25,6 +25,7 @@
                         {
                             echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
                             <div><a href='listUser.php'>Utilisateurs</a></div><br>
+                            <div><a href='listFilms.php'>Films</a></div><br>
                             <div><a href='logOut.php'>Se déconnecter</a></div><br>";
                         }
                     ?>
@@ -37,43 +38,15 @@
                 </p>
             </div>
         </div>
-        <ul>
-        <li><a href="home.php">Accueil</a></li>
-            <li><a href="contact.php">Contact</a></li>
-            <li><a href="profil.php">Profil</a></li>
-            <?php if(!isset($_SESSION['email']))
-            {
-                echo "<li><a href='connexion.php'>Connexion</a></li>
-                <li><a href='inscription.php'>Inscription</a></li>";
-            } 
-            else
-            {
-                echo "<li><a href='logOut.php'>Se déconnecter</a></li>";
-                if($_SESSION['isAdmin']==1)
-                {
-                    echo "<li><a href='listUser.php'>Utilisateurs</a></li>";
-                }
-            }
-            ?>
-        </ul>
         <?php 
-            try{
+            try
+            {
                 $bdd=new PDO('mysql:host=localhost; dbname=videotheque; charset=utf8', 'root', 'root');
                 $id=$_POST['id_user'];
-                if(isset($_POST['deleteUser']))
-                {
-                    
-                    if($id!=1)
-                    { 
-                        echo $id;
-                        $sql= 'DELETE FROM users WHERE id_user='.$_POST['id_user'];
-                        $bdd->exec($sql);
-                        echo 'Suppression réussie';
-                        header('Location: listUser.php');
-                        exit();
-                    }
-                   
-                }else if(isset($_POST['editUser']))
+                $listeUsers = $bdd->prepare('SELECT nom, prenom, mail FROM users WHERE id_user='.$id);
+                $listeUsers->execute();
+                $users=$listeUsers->fetchAll();
+                foreach ($users as $user) 
                 {
                     echo "<div>
                     <form action='updateUser.php' method='post'>
@@ -81,28 +54,21 @@
                             <span for='colFormspan' class='col-sm-2 col-form-span'>Nom</span>
                             <div class='col-sm-10'>
                                 <input name='id_user' type='hidden' value='".$id."' >
-                                <input type='text' class='form-control' name='nom' id='name' placeholder='Nom' value='".$_POST['nom']."'>
+                                <input type='text' class='form-control' name='nom' id='name' placeholder='Nom' value='".$user['nom']."'>
                             </div>
                         </div>
 
                         <div class='formInput'>
                             <span for='colFormspan' class='col-sm-2 col-form-span'>Prénom</span>
                             <div class='col-sm-10'>
-                                <input type='text' class='form-control' name='prenom' id='firstname' placeholder='Prénom' value='".$_POST['prenom']."'>
+                                <input type='text' class='form-control' name='prenom' id='firstname' placeholder='Prénom' value='".$user['prenom']."'>
                             </div>
                         </div>
 
                         <div class='formInput'>
                             <span for='colFormspan' class='col-sm-2 col-form-span'>Email</span>
                             <div class='col-sm-10'>
-                                <input type='email' class='form-control' name='mail' id='mail' placeholder='Email' value='".$_POST['mail']."'>
-                            </div>
-                        </div>
-
-                        <div class='formInput'>
-                            <span for='colFormspan' class='col-sm-2 col-form-span'>Mot de passe</span>
-                            <div class='col-sm-10'>
-                                <input type='password' class='form-control' name='password' id='mdp' placeholder='Mot de passe'>
+                                <input type='email' class='form-control' name='mail' id='mail' placeholder='Email' value='".$user['mail']."'>
                             </div>
                         </div>
 
@@ -110,8 +76,6 @@
                             <button type='submit' id='buttonInscri'>M'inscrire</button>
                         </div>  
                     </form>
-                    <script src='script.js'></script>
-                    <script src='inscription.js'></script>
                 </div>";
                 }
                 

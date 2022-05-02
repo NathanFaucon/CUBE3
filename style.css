@@ -144,3 +144,12 @@ table, th, td
     padding:5px;
     margin-left: 20%;
 }
+
+.bouton{
+	width: 100%;
+	margin-bottom: 4px;
+}
+
+.card-img-top{
+	height: 350px;
+}
