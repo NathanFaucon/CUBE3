@@ -84,7 +84,7 @@
 								if ($FilmGenre['id_film']==$film['id_film'])
 								foreach ($genres as $genre) {
 									if ($genre['id_genre']==$FilmGenre['id_genre'])
-									echo $genre['nom_genre']."<br>";
+									echo $genre['nom_genre'];
 								}
 							}
 							echo "</p><p>";
