@@ -24,9 +24,12 @@
 						}
 						else
 						{
-							echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
-                            <div><a href='listUser.php'>Utilisateurs</a></div><br>
-							<div><a href='listFilms.php'>Films</a></div><br>
+							if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']==1){
+								echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
+								<div><a href='listUser.php'>Utilisateurs</a></div><br>
+								<div><a href='listFilms.php'>Films</a></div><br>";
+							}
+							echo "<div><a href='maListe.php'>Ma Liste</a></div><br>
 							<div><a href='logOut.php'>Se déconnecter</a></div><br>";
 						}
 					?>
@@ -101,29 +104,33 @@
 					<div class='card-body'>
 					<h5 class='card-title'>".$film['nom_film']."</h5>";
 						if(isset($_SESSION['email'])){
-						echo "<p class='test'>
+						echo "<div class='test'>
 						<form method='post' action='note.php'>
-						<input type='hidden' value='".$film['id_film']."' name='id_film'>
-						<input type='hidden' value='1' name='valeur'>
-						<input type='image' src='images/etoile.png' class='etoile'>
+							<input type='hidden' value='".$film['id_film']."' name='id_film'>
+							<input type='hidden' value='1' name='valeur'>
+							<input type='image' src='images/etoile.png' class='etoile'>
 						</form>
 						<form method='post' action='note.php'>
-						<input type='hidden' value='".$film['id_film']."' name='id_film'>
-						<input type='hidden' value='2' name='valeur'>
-						<input type='image' src='images/etoile.png' class='etoile'>
-						</form><form method='post' action='note.php'>
-						<input type='hidden' value='".$film['id_film']."' name='id_film'>
-						<input type='hidden' value='3' name='valeur'>
-						<input type='image' src='images/etoile.png' class='etoile'>
-						</form><form method='post' action='note.php'>
-						<input type='hidden' value='".$film['id_film']."' name='id_film'>
-						<input type='hidden' value='4' name='valeur'>
-						<input type='image' src='images/etoile.png' class='etoile'>
-						</form><form method='post' action='note.php'>
-						<input type='hidden' value='".$film['id_film']."' name='id_film'>
-						<input type='hidden' value='5' name='valeur'>
-						<input type='image' src='images/etoile.png' class='etoile'>
-						</form>";}
+							<input type='hidden' value='".$film['id_film']."' name='id_film'>
+							<input type='hidden' value='2' name='valeur'>
+							<input type='image' src='images/etoile.png' class='etoile'>
+						</form>
+						<form method='post' action='note.php'>
+							<input type='hidden' value='".$film['id_film']."' name='id_film'>
+							<input type='hidden' value='3' name='valeur'>
+							<input type='image' src='images/etoile.png' class='etoile'>
+						</form>
+						<form method='post' action='note.php'>
+							<input type='hidden' value='".$film['id_film']."' name='id_film'>
+							<input type='hidden' value='4' name='valeur'>
+							<input type='image' src='images/etoile.png' class='etoile'>
+						</form>
+						<form method='post' action='note.php'>
+							<input type='hidden' value='".$film['id_film']."' name='id_film'>
+							<input type='hidden' value='5' name='valeur'>
+							<input type='image' src='images/etoile.png' class='etoile'>
+						</form></div>
+						";}
 						echo"
 						<div>Note : ";
 						$moyenne = $bdd->prepare('SELECT ROUND(AVG(valeur_note),1) AS moyenne FROM notes WHERE id_film='.$film['id_film']);
@@ -136,16 +143,16 @@
 							}
 						}
 						echo "</div>
-					</p>
+					
 					
 					</form>
 					";
 					if(isset($_SESSION['email'])){
 					echo "<form method='post' action='favFilm.php'>
-					<button type='submit' value='".$film['id_film']."' name='id_film'>Ajouter à ma liste</button>";
+					<button type='submit' value='".$film['id_film']."' name='id_film'>Ajouter à ma liste</button></form>";
 					}
 					echo "</div>
-				</div></form>";
+				</div>";
 			}
 		?>
 		</div>

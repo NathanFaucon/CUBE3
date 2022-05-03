@@ -24,9 +24,12 @@
 						}
 						else
 						{
-							echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
-                            <div><a href='listUser.php'>Utilisateurs</a></div><br>
-							<div><a href='listFilms.php'>Films</a></div><br>
+							if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']==1){
+								echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
+								<div><a href='listUser.php'>Utilisateurs</a></div><br>
+								<div><a href='listFilms.php'>Films</a></div><br>";
+							}
+							echo "<div><a href='maListe.php'>Ma Liste</a></div><br>
 							<div><a href='logOut.php'>Se déconnecter</a></div><br>";
 						}
 					?>

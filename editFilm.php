@@ -18,16 +18,19 @@
                     <div><a href='index.php'>Home</a></div><br>
                     <?php 
                         if(!isset($_SESSION['email'])){
-                            echo "<div><a href='connexion.php'>Me connecter</a></div><br>
-                            <div><a href='inscription.php'>M'inscrire</a></div><br>";
-                        }
-                        else
-                        {
-                            echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
-                            <div><a href='listUser.php'>Utilisateurs</a></div><br>
-                            <div><a href='listFilms.php'>Films</a></div><br>
-                            <div><a href='logOut.php'>Se déconnecter</a></div><br>";
-                        }
+							echo "<div><a href='connexion.php'>Me connecter</a></div><br>
+							<div><a href='inscription.php'>M'inscrire</a></div><br>";
+						}
+						else
+						{
+							if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']==1){
+								echo "<div><a href='ajoutFilm.php'>Ajouter un film</a></div><br>
+								<div><a href='listUser.php'>Utilisateurs</a></div><br>
+								<div><a href='listFilms.php'>Films</a></div><br>";
+							}
+							echo "<div><a href='maListe.php'>Ma Liste</a></div><br>
+							<div><a href='logOut.php'>Se déconnecter</a></div><br>";
+						}
                     ?>
                 </div>
             </div>
