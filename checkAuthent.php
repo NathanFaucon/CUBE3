@@ -33,7 +33,7 @@
             }
             else{
             $_SESSION['email']=$email_user;
-            $_SESSION['admin']=$isAdmin;
+            $_SESSION['isAdmin']=$isAdmin;
             $_SESSION['id_user']=$id_user;
             header('Location: index.php');
             exit();     

@@ -153,3 +153,13 @@ table, th, td
 .card-img-top{
 	height: 350px;
 }
+
+.etoile{
+	width: 30px;
+	height: 30px;
+}
+
+.test{
+	display:flex; 
+	flex-direction:row;
+}

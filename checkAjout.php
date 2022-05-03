@@ -30,7 +30,9 @@
             }
             else
             {
-                $sql= "INSERT INTO films (nom_film, date_film, synopsis, image_film, duree_film ) VALUES ('".$_POST['nom']."','".$_POST['date']."','".$_POST['synopsis']."','".$_FILES['image']['name']."','".$_POST['duree']."');";
+                $nom=str_replace("'","\'",$_POST['nom']);
+                $synopsis=str_replace("'","\'",$_POST['synopsis']);
+                $sql= "INSERT INTO films (nom_film, date_film, synopsis, image_film, duree_film ) VALUES ('".$nom."','".$_POST['date']."','".$synopsis."','".$_FILES['image']['name']."','".$_POST['duree']."');";
                 $bdd->exec($sql);
                 $listeFilms = $bdd->prepare('SELECT * FROM films');
                 $listeFilms->execute();

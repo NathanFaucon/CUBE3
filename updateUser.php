@@ -3,7 +3,7 @@
         <p>
             <a href="listUser.php">Retourner à la liste des utilisateurs</a>
         </p>
-        <?php 
+        <?php
             try{
                 $bdd=new PDO('mysql:host=localhost; dbname=videotheque; charset=utf8', 'root', 'root');
                 $sql="UPDATE users SET mail='".$_POST['mail']."',nom='".$_POST['nom']."',prenom='".$_POST['prenom']."' WHERE id_user=".$_POST['id_user'];

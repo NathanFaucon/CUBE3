@@ -48,21 +48,60 @@
 			{
 				echo "Connection failed: " . $e->getMessage();
 			}
-			
 			$listeFilms = $bdd->prepare('SELECT * FROM films');
 			$listeFilms->execute();
 			$films=$listeFilms->fetchAll();
 			foreach ($films as $film) 
 			{
 				echo "
-				<form method='post' action='favFilm.php'>
+				
 				<div class='card' style='width: 18rem;'>
 					<img src='images/".$film['image_film']."' class='card-img-top' alt='...'>
 					<div class='card-body'>
 					<h5 class='card-title'>".$film['nom_film']."</h5>
-					<p class='card-text'>".$film['synopsis']."</p>
-					<button type='submit' value='".$film['id_film']."' name='id_film'>Ajouter à ma liste</button>
-					</div>
+					<p class='test'>
+						<form method='post' action='note.php'>
+						<input type='hidden' value='".$film['id_film']."' name='id_film'>
+						<input type='hidden' value='1' name='valeur'>
+						<input type='image' src='images/etoile.png' class='etoile'>
+						</form>
+						<form method='post' action='note.php'>
+						<input type='hidden' value='".$film['id_film']."' name='id_film'>
+						<input type='hidden' value='2' name='valeur'>
+						<input type='image' src='images/etoile.png' class='etoile'>
+						</form><form method='post' action='note.php'>
+						<input type='hidden' value='".$film['id_film']."' name='id_film'>
+						<input type='hidden' value='3' name='valeur'>
+						<input type='image' src='images/etoile.png' class='etoile'>
+						</form><form method='post' action='note.php'>
+						<input type='hidden' value='".$film['id_film']."' name='id_film'>
+						<input type='hidden' value='4' name='valeur'>
+						<input type='image' src='images/etoile.png' class='etoile'>
+						</form><form method='post' action='note.php'>
+						<input type='hidden' value='".$film['id_film']."' name='id_film'>
+						<input type='hidden' value='5' name='valeur'>
+						<input type='image' src='images/etoile.png' class='etoile'>
+						</form>
+						<div>Note : ";
+						$moyenne = $bdd->prepare('SELECT ROUND(AVG(valeur_note),1) AS moyenne FROM notes WHERE id_film='.$film['id_film']);
+						$moyenne->execute();
+						$avg=$moyenne->fetchAll();
+						foreach($avg as $moy)
+						{
+							if(1){
+								echo $moy['moyenne'];
+							}
+						}
+						echo "</div>
+					</p>
+					
+					</form>
+					";
+					if(isset($_SESSION['email'])){
+					echo "<form method='post' action='favFilm.php'>
+					<button type='submit' value='".$film['id_film']."' name='id_film'>Ajouter à ma liste</button>";
+					}
+					echo "</div>
 				</div></form>";
 			}
 		?>
