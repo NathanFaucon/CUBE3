@@ -91,8 +91,8 @@
 							foreach ($realisepar as $realise) {
 								if ($realise['id_film']==$film['id_film'])
 								foreach ($realisateurs as $realisateur) {
-									if ($realisateur['id_real']==$realisepar['id_real'])
-									echo "test".$realisateur['nom_real'];
+									if ($realisateur['id_real']==$realise['id_real'])
+									echo $realisateur['nom_real'];
 								}
 							}
 						echo "</p>
