@@ -74,7 +74,6 @@
 				
 
 				echo "
-				<form method='post' action='favFilm.php'>
 				<div class='card' style='width: 18rem;'>
 					<figure class='hover-img'>
 						<img src='images/".$film['image_film']."' class='card-img-top' alt='...'>
@@ -103,6 +102,7 @@
 					</figure>
 					<div class='card-body'>
 					<h5 class='card-title'>".$film['nom_film']."</h5>";
+					echo "<div>Durée : ".$film['duree_film']." minutes</div><br>";
 						if(isset($_SESSION['email'])){
 						echo "<div class='test'>
 						<form method='post' action='note.php'>
@@ -142,11 +142,9 @@
 								echo $moy['moyenne'];
 							}
 						}
-						echo "</div>
-					
-					
-					</form>
-					";
+						echo "</div>"; 
+
+
 					if(isset($_SESSION['email'])){
 					echo "<form method='post' action='favFilm.php'>
 					<button type='submit' value='".$film['id_film']."' name='id_film'>Ajouter à ma liste</button></form>";
